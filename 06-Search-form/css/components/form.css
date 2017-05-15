@@ -1,0 +1,21 @@
+.form-login {
+  position: relative;
+  font-family: 'Indie Flower', cursive, sans-serif;
+  width: 25%;
+  padding: 50px 20px;
+  background-image: radial-gradient(circle at center, blue, green);
+  border-radius: 3px;
+  box-shadow: 1px 1px 1px #ECECEC;
+  margin: 0;
+}
+.form-login h1 {
+  font-family: 'Indie Flower', cursive, sans-serif;
+  font-size: 60px;
+  margin-bottom: 30px;
+  font-weight: bold;
+  text-align: center;
+}
+.form-login .btn {
+  width: 100%;
+  line-height: 30px;
+}
