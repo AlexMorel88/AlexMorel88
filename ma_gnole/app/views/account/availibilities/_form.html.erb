@@ -1,0 +1,7 @@
+<%= form_for(availibility, url: account_availibilities_path, method: :create) do |f| %>
+  <%= f.text_field :start_date, "data-provide" => 'datepicker' %>
+  <%= f.text_field :end_date, "data-provide" => 'datepicker' %>
+  <%= f.text_field :place_id, value: place_id, class: 'hidden' %>
+  <%= f.button :submit, class: "btn btn-primary"  %>
+<% end %>
+

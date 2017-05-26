@@ -1,0 +1,23 @@
+<h3>Bonjour <%= User.find(@booking.user_id).email %>, </h3>
+
+<p>
+  <%= @greeting %> Votre réservation pour <%= Place.find(@booking.place_id).name %> du <%= @booking.start_date %> au <%= @booking.end_date %> est confirmée par <%= link_to "le Bon Vignoble", "https://magnole.herokuapp.com/"  %>.
+</p>
+-------------------------
+<br>
+<%= (@booking.end_date - @booking.start_date).to_i %> jours à <%= @booking.price %> €/jour
+<br>
+-------------------------
+<br>
+<%= (@booking.end_date - @booking.start_date).to_i * @booking.price %> euros
+<br>
+-------------------------
+<p> Votre facture sera de <%= (@booking.end_date - @booking.start_date).to_i * @booking.price %> euros.</p>
+<p> Merci de votre confiance </p>
+<h3> Toute l'équipe du Bon Vignoble vous salue. </h3>
+
+<div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2));">
+
+
+
+<%= image_tag('http://051b1de9e9ecc772c2d2-4491a5e521b7c42737795ca67148d758.r80.cf1.rackcdn.com/vogelzang-vineyard.jpg', height: '500', width: '1000' )  %>

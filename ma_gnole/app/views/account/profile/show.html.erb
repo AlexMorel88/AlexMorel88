@@ -1,0 +1,115 @@
+
+<div class="container">
+  <h2> Welcome <%= current_user.profile.first_name %> <%= current_user.profile.last_name %> </h1>
+
+  <div class="tabs">
+    <a class="tab active" data-target="#last_trips">
+      <h3>Precedents voyages</h3>
+    </a>
+    <a class="tab" data-target="#next_trips">
+      <h3>Voyages à venir</h3>
+    </a>
+    <a class="tab" data-target="#my_places">
+      <h3>Dashboard business</h3>
+    </a>
+  </div>
+
+
+   <div class="row tab-content" id="last_trips">
+   <% @old_bookings.each do |element|%>
+      <div class="col-xs-12 col-sm-4">
+        <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('background.jpg');">
+          <div class="card-category"><%= element.start_date %>  <%= element.end_date %></div>
+          <div class="card-description">
+            <h2><%= Place.find(element.place_id).name %></h2>
+            <p><%= Place.find(element.place_id).description %></p>
+          </div>
+          <img class="card-user avatar" src="user.jpg">
+          <a class="card-link" href="#" ></a>
+        </div>
+        <%= link_to 'New review', new_place_places_review_path(Place.find(element.place_id)), class: "btn btn-primary" %>
+      </div>
+   <% end %>
+   </div>
+
+
+
+  <div class="row tab-content hidden" id="next_trips">
+   <% @next_bookings.each do |element|%>
+      <div class="col-xs-12 col-sm-4">
+        <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('background.jpg');">
+          <div class="card-category"><%= element.start_date %>  <%= element.end_date %></div>
+          <div class="card-description">
+            <h2><%= Place.find(element.place_id).name %></h2>
+            <p><%= Place.find(element.place_id).description %></p>
+          </div>
+          <img class="card-user avatar" src="user.jpg">
+          <a class="card-link" href="#" ></a>
+        </div>
+      </div>
+    <% end %>
+   </div>
+
+  <div class="tab-content hidden" id="my_places">
+    <%= link_to "Add a new place", new_account_place_path, class: "btn-medium top-right" %>
+      <div class="media-section">
+      <% @places.each do |element| %>
+        <h2><%= link_to element.name, place_path(@places.ids) %> </h2>
+        <div id="btn-update">
+          <%= link_to "Update Place", edit_account_place_path(element), class: "btn btn-medium" %>
+        </div>
+        <div id="btn-delete">
+         <%= link_to "Delete Place", account_place_path(element), method: :delete , class: "btn btn-medium" %>
+        </div>
+      </div>
+
+      <div>
+        <h3> Dates non disponibles </h3>
+        <%= render partial: 'account/availibilities/form', locals: { availibility: Availibility.new(), place_id: element.id }%>
+
+          <% @availibilities[0].each do |e| %>
+            <p> Non disponible du <%= e.start_date.strftime("%d %m %Y") %> au <%= e.end_date.strftime("%d %m %Y")%></p>
+          <% end %>
+      </div>
+      <hr>
+
+      <div>
+        <h3>Réservations en attente</h3>
+          <% Booking.where(place_id: element.id).where(status: "pending").each do |e| %>
+            <p>Réservation du <%= e.start_date.strftime("%d %m %Y") %> au <%= e.end_date.strftime("%d %m %Y") %></p>
+            <p>Statut de la réservation: <%= e.status %></p>
+            <p>  <%= link_to "accepted la réservation", accepted_account_booking_path(e),
+            data: { confirm: "Are you sure?" }, class: "btn-treehouse"%>
+              <%= link_to "refuser la réservation", refused_account_booking_path(e),
+            data: { confirm: "Are you sure?" }, class: "btn-red" %>
+            </p>
+            <br>
+            <%= e.price %>
+            <br>
+            <br>
+            <br>
+
+           <% end %>
+      </div>
+      <hr>
+         <h3>Réservations accepted/refused</h3>
+
+           <% Booking.where(place_id: element.id).where("status != ?", "pending").order(:start_date).each do |e|%>
+              <%= Profile.where(user_id: e.user_id)[0].first_name + ' ' + Profile.where(user_id: e.user_id)[0].last_name  %>
+              <br>
+              <%= e.start_date.strftime("%d %m %Y") %>
+              <br>
+              <%= e.end_date.strftime("%d %m %Y") %>
+              <br>
+              <%= e.status %>
+              <br>
+              <%= e.price %>
+              <br>
+              <%= link_to 'New review user', new_users_review_path(user_id: e.user_id, place_id: e.place_id), class: "btn btn-primary" %>
+              <br>
+              <br>
+        <% end %>
+       <% end %>
+   </div>
+</div>
+

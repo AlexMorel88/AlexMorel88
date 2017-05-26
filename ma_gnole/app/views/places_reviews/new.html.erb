@@ -1,0 +1,18 @@
+<h1>place_review#new</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-8">
+      <%= simple_form_for(@places_review, url: account_place_places_reviews_path) do |f| %>
+        <%= f.error_notification %>
+        <%= f.input :rating %>
+        <%= f.input :description %>
+        <%= f.button :submit %>
+      <% end %>
+    </div>
+
+    <div class="col-xs-12 col-sm-3">
+      <h3>Un petit clic vaut mieux qu'une grosse claque</h3>
+    </div>
+  </div>
+
+</div>

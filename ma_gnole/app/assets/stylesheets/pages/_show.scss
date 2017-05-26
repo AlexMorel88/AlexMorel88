@@ -1,0 +1,43 @@
+.media {
+  display: flex;
+}
+.media-body {
+  flex: 1 1 auto;
+  padding-top:0px;
+  padding-bottom:20px;
+  padding-right:20px;
+  padding-left: 20px;
+}
+.media-body img {
+  width: 100%;
+}
+.media-aside { /* position fixed sur le coté*/
+  flex: 0 0 800px;
+  margin-right: 20px;
+  padding: 30px;
+  align-self: flex-start;
+  background: #F8F7F7;
+  border-left: 1px solid #f0efef;
+
+}
+.media-section {
+  margin: 40px auto;
+
+}
+.media-section:first-child {
+  margin-top: 0;
+}
+.media-section:last-child {
+  margin-bottom: 0;
+}
+.top-right {
+  position : absolute;
+  top : 82px;
+  right : 20px;
+}
+.profilespicture {
+  height:80px;
+  width:80px;
+  position : fixed;
+  right : 30px;
+}

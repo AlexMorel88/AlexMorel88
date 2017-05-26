@@ -1,0 +1,77 @@
+<h1 class="text-center">Your places list</h1>
+
+
+<div class="container">
+  <div class="row">
+    <% @places.each do |place| %>
+      <div class="col-xs-12 col-sm-4">
+        <div class="card text-center">
+
+          <% if place.photo %>
+            <div class="card"
+              style="background-image: linear-gradient(rgba(0,0,0,0.3),
+               rgba(0,0,0,0.2)), url('<%= image_path place.photo %>')">
+          <% else %>
+            <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2));">
+          <% end %>
+
+          <div class="card-description">
+              <h2>pour <%= place.nbr_person %> personnes</h2>
+              <p><%= place.address %></p>
+            </div>
+
+            <div class=“card-description”>
+
+                  <h3><%= link_to place.name, place_path(place) %></h3>
+
+                  <h3><%= link_to place.name, account_place_path(place) %></h3>
+
+              </div>
+            <a class=“card-link” href=“#” ></a>
+
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+
+</div>
+
+
+<div id="map"></div>
+
+
+
+<style type="text/css">
+
+      #map {
+        display: flex;
+        height: 100vh;
+        width: 100%;
+      }
+    </style>
+
+<!-- pour récupérer le javascript -->
+<%= content_for :after_js do %>
+<!-- le raw est pour empecher l'échappement du tableau passé en argument et converti en json ici (verif en console sans le raw pour voir la différence) -->
+    <script type="text/javascript">
+      $(document).on('ready', function() {
+        var handler = Gmaps.build('Google', { markers: { clusterer: undefined }});
+        handler.buildMap({ internal: { id: 'map' } }, function(){
+          markers = handler.addMarkers(<%= raw @markers.to_json %>);
+          handler.bounds.extendWith(markers);
+          handler.fitMapToBounds();
+        });
+      })
+    </script>
+
+<% end %>
+
+
+
+
+
+
+</div>
+

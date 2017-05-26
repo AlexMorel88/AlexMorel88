@@ -1,0 +1,94 @@
+
+
+<div class="media">
+
+  <div class="media-body">
+    <div class="media-section">
+      <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)),
+      url(<%= image_path "vineyard.jpg" %>)">
+        <div class="card-name">
+          <h2><%= @place.name %></h2>
+        </div>
+        <div class="card-description">
+          <h3><%= @place.address%></h3>
+        </div>
+        <div class="card-user avatar">
+          <%= image_tag "logo.png" %>
+        </div>
+        <a class="card-link" href="#" ></a>
+      </div>
+    </div>
+
+    <div class="media-section">
+      <h2>Description</h2>
+      <%= @place.description %>
+    </div>
+    <% @place_reviews.each do |review|%>
+    <div class="media-section">
+
+
+      <h3>Comment</h3>
+      <%= review.description %>
+      <h3>Ratings</h3>
+
+      <%= review.rating %>
+    </div>
+    <% end %>
+  </div>
+
+  <div class="media-aside">
+    <div class="media-section">
+
+      <h3>Prix/j</h3>
+      <%= @place.price %>
+
+    </div>
+    <div class="media-section">
+       <h3>Dates non disponibles</h3>
+        <% @place.availibilities.each do |availibility| %>
+          <p> Non disponible du <%= availibility.start_date.strftime("%d %m %Y") %> au <%= availibility.end_date.strftime("%d %m %Y")%></p>
+      <% end %>
+
+    </div>
+
+
+
+    <%= link_to "Book now", new_place_booking_path(@place), class: "btn btn-primary" %>
+
+    <div class="media-section">
+      <div id="map"> </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+
+
+
+<style type="text/css">
+
+      #map {
+        display: flex;
+        height: 100vh;
+        width: 100%;
+      }
+    </style>
+
+<!-- pour récupérer le javascript -->
+<%= content_for :after_js do %>
+<!-- le raw est pour empecher l'échappement du tableau passé en argument et converti en json ici (verif en console sans le raw pour voir la différence) -->
+    <script type="text/javascript">
+      $(document).on('ready', function() {
+        var handler = Gmaps.build('Google', { markers: { clusterer: undefined }});
+        handler.buildMap({ internal: { id: 'map' } }, function(){
+          markers = handler.addMarkers(<%= raw @markers.to_json %>);
+          handler.bounds.extendWith(markers);
+          handler.fitMapToBounds();
+        });
+      })
+    </script>
+
+<% end %>
+

@@ -1,0 +1,20 @@
+<h1>UsersReviews#new</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-8">
+      <%= simple_form_for(@user_review, url: users_reviews_path) do |f| %>
+        <%= f.error_notification %>
+        <%= f.input :rating %>
+        <%= f.input :description %>
+        <%= f.hidden_field :user_id, value: @user_id %>
+        <%= f.hidden_field :place_id, value: @place_id %>
+        <%= f.button :submit %>
+      <% end %>
+    </div>
+
+    <div class="col-xs-12 col-sm-3">
+      <h3>Un petit clic vaut mieux qu'une grosse claque</h3>
+    </div>
+  </div>
+
+</div>

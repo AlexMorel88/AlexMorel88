@@ -1,0 +1,68 @@
+<div id="mySearchBar" class="search_bar">
+  </div>
+    <div class="search">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+              <div class="form-section">
+                <div class="row">
+        <!-- on précise que c'est une méthode get sur le formulaire (pas de sauvegarde de données en db) et on pass la route de destination en action du formulaire-->
+        <!-- account_places_path -->
+            <form role="form" method="get" action="<%= places_path %>">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label class="sr-only" for="location">Location</label>
+                  <% if params[:location].present? %>
+                    <input type="text" value=<%= params[:location]%> class="form-control" name="location" placeholder="Where ?">
+                  <% else %>
+                    <input type="text" class="form-control" name="location" placeholder="Where ?">
+                  <% end%>
+                </div>
+              </div>
+              <div class="col-md-2">
+                <div class="form-group">
+                  <label class="sr-only" for="checkin">Check in</label>
+                  <div class="input-group">
+                    <input type="date" class="form-control" name="checkin" placeholder="Check in">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2">
+                <div class="form-group">
+                  <label class="sr-only" for="checkout">Check out</label>
+                  <div class="input-group">
+                    <input type="date" class="form-control" name="checkout" placeholder="Check out">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2">
+                <div class="form-group">
+                  <label class="sr-only" for="guest">Guest</label>
+                  <input type="number" class="form-control" name="nbrPersons" placeholder="Number ?">
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label class="sr-only" for="location">Location</label>
+                  <% if params[:price].present? %>
+                    <input type="text" value=<%= params[:price]%> class="form-control" name="price" placeholder="Where ?">
+                  <% else %>
+                    <input type="number" class="form-control" name="price" placeholder="Max price">
+                  <% end%>
+                </div>
+              </div>
+
+
+              <div class="col-md-2">
+                <button type="submit" class="btn btn-default btn-primary">Search</button>
+              </div>
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

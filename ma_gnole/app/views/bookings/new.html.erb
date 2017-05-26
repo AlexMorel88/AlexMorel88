@@ -1,0 +1,19 @@
+<h1>booking#new</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-8">
+      <%= simple_form_for(@booking, url: place_bookings_path) do |f| %>
+        <%= f.error_notification %>
+        <%= f.input :start_date %>
+        <%= f.input :end_date %>
+        <%= f.button :submit %>
+      <% end %>
+    </div>
+
+    <div class="col-xs-12 col-sm-3">
+      <h3>Reservez en un clic votre oenotour</h3>
+    </div>
+  </div>
+
+</div>
+

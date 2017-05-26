@@ -1,0 +1,30 @@
+// Graphical variables
+@import "config/variables";
+@import "config/bootstrap_variables";
+
+// External libraries
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import "font-awesome-sprockets";
+@import "font-awesome";
+@import "vendor/index";
+
+// Your CSS
+@import "layout/index";
+@import "components/*";
+@import "pages/index";
+
+@import "pages/show";
+
+@import "components/alert";
+@import "components/avatars";
+@import "components/badges";
+@import "components/banner";
+@import "components/btn";
+@import "components/card";
+@import "components/product";
+@import "components/tab";
+@import "components/search_bar";
+
+
+

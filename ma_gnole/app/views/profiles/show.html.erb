@@ -1,0 +1,33 @@
+<div class="media">
+  <div class="media-body">
+    <div class="media-section">
+      <h3>Bienvenu sur le profil de <%= @profile.first_name %> <%= @profile.last_name %></h3>
+      <h5> member since  <%= current_user.profile.created_at.strftime("%d %m %Y")%></h5>
+    </div>
+    <hr>
+    <div class="media-section">
+      <h3>Description</h3>
+      <%= %>
+    </div>
+    <hr>
+      <% @user.user_reviews.each do |review| %>
+      <div class="media-section">
+        <h3><strong>Commentaires</strong></h3>
+        <h5>Avis des utilisateurs</h5>
+        <p>From <%= review.place.name %> by <%= Profile.find(review.place.user_id).first_name%> <%= Profile.find(review.place.user_id).last_name%></p>
+          <%= review.description %>
+        <h5>Rating</h5>
+          Note : <%= review.rating %>
+      </div>
+    <% end%>
+  </div>
+  <div class="media-aside">
+      <%= image_tag "fifi.jpg", class: "profilespicture"%>
+    <div class="media-section">
+
+      <h3>Discover my place</h3>
+
+    </div>
+
+  </div>
+</div>
